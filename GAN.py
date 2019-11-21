@@ -6,18 +6,19 @@ import matplotlib.pyplot as plt
 
 z_latent_size = 100
 with tf.device('/GPU:0'):
+    initializer = tf.contrib.layers.xavier_initializer()
     weights_bias = {
-      'g_hl1_weights' : tf.Variable(tf.random.normal(shape = (z_latent_size, 128) ,dtype=tf.float64)),
-      'g_hl1_bias' : tf.Variable(tf.zeros(shape = (1, 128) ,dtype=tf.float64)),
+      'g_hl1_weights' : tf.Variable(initializer(shape = (z_latent_size, 128) ,dtype=tf.float64)),
+      'g_hl1_bias' : tf.Variable(initializer(shape = (1, 128) ,dtype=tf.float64)),
 
-      'g_hl2_weights' : tf.Variable(tf.random.normal(shape = (128, 28*28) ,dtype=tf.float64)),
-      'g_hl2_bias' : tf.Variable(tf.zeros(shape = (1, 28*28) ,dtype=tf.float64)),
+      'g_hl2_weights' : tf.Variable(initializer(shape = (128, 28*28) ,dtype=tf.float64)),
+      'g_hl2_bias' : tf.Variable(initializer(shape = (1, 28*28) ,dtype=tf.float64)),
 
-      'd_hl1_weights' : tf.Variable(tf.random.normal(shape = (28*28, 128) ,dtype=tf.float64)),
-      'd_hl1_bias' : tf.Variable(tf.zeros(shape = (1, 128) ,dtype=tf.float64)),
+      'd_hl1_weights' : tf.Variable(initializer(shape = (28*28, 128) ,dtype=tf.float64)),
+      'd_hl1_bias' : tf.Variable(initializer(shape = (1, 128) ,dtype=tf.float64)),
 
-      'd_out_weights' : tf.Variable(tf.random.normal(shape = (128, 1) ,dtype=tf.float64)),
-      'd_out_bias' : tf.Variable(tf.zeros(shape = (1, 1) ,dtype=tf.float64)),
+      'd_out_weights' : tf.Variable(initializer(shape = (128, 1) ,dtype=tf.float64)),
+      'd_out_bias' : tf.Variable(initializer(shape = (1, 1) ,dtype=tf.float64)),
     }
 
 def scale_data(data):
